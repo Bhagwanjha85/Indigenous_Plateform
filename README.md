@@ -1,6 +1,10 @@
 # **Indigenous Knowledge Bridger**
 
-![Project Banner](assets/banner.png)
+<p align="center">
+  <img src="Pictures_for_Github/img1.png" width="400"/>
+</p>
+
+---
 
 <p align="center">
   <b> Full-stack Platform for helping Indigenous Languages Knowledge, Culture & Language</b>
@@ -193,6 +197,13 @@ This project proves that **open‑source local LLMs (Ollama)** can outperform pr
 
 
 ---
+##  Acknowledgements
+
+Special thanks to **IIIT Hyderabad - IndicWiki Project**  
+(@indicwiki-iiit) for providing inspiration for this project.
+
+The idea of ​​the *Indigenous Knowledge Bridge* was inspired during my internship with the **IndicWiki Initiative at IIIT Hyderabad**, which focuses on preserving and promoting Indian languages, culture, ​​and indigenous knowledge.
+
 
 ##  License
 

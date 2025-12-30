@@ -1,0 +1,79 @@
+{
+  "indigenous_languages": {
+    "Hindi": {
+      "code": "hi",
+      "native_name": "हिन्दी",
+      "speakers": "600M+"
+    },
+    "Bengali": {
+      "code": "bn",
+      "native_name": "বাংলা",
+      "speakers": "265M+"
+    },
+    "Telugu": {
+      "code": "te",
+      "native_name": "తెలుగు",
+      "speakers": "82M+"
+    },
+    "Marathi": {
+      "code": "mr",
+      "native_name": "मराठी",
+      "speakers": "83M+"
+    },
+    "Tamil": {
+      "code": "ta",
+      "native_name": "தமிழ்",
+      "speakers": "78M+"
+    },
+    "Gujarati": {
+      "code": "gu",
+      "native_name": "ગુજરાતી",
+      "speakers": "56M+"
+    },
+    "Kannada": {
+      "code": "kn",
+      "native_name": "ಕನ್ನಡ",
+      "speakers": "44M+"
+    },
+    "Malayalam": {
+      "code": "ml",
+      "native_name": "മലയാളം",
+      "speakers": "38M+"
+    },
+    "Odia": {
+      "code": "or",
+      "native_name": "ଓଡ଼ିଆ",
+      "speakers": "35M+"
+    },
+    "Punjabi": {
+      "code": "pa",
+      "native_name": "ਪੰਜਾਬੀ",
+      "speakers": "113M+"
+    },
+    "Assamese": {
+      "code": "as",
+      "native_name": "অসমীয়া",
+      "speakers": "15M+"
+    },
+    "Maithili": {
+      "code": "mai",
+      "native_name": "मैथिली",
+      "speakers": "13M+"
+    },
+    "Santali": {
+      "code": "sat",
+      "native_name": "ᱥᱟᱱᱛᱟᱲᱤ",
+      "speakers": "7M+"
+    },
+    "Kashmiri": {
+      "code": "ks",
+      "native_name": "कॉशुर",
+      "speakers": "7M+"
+    },
+    "Nepali": {
+      "code": "ne",
+      "native_name": "नेपाली",
+      "speakers": "16M+"
+    }
+  }
+}

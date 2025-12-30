@@ -1,0 +1,653 @@
+{% extends 'layout.html' %}
+
+{% block ogtitle %}{{ blog.title }}{% endblock %}
+{% block ogdescription %}{{ blog.desc }}{% endblock %}
+{% block ogimage %}{{ blog.thumbnail.url }}{% endblock %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<!--============== CSS Start =======================-->
+<style>
+  .blog-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .blog-header {
+    background: linear-gradient(135deg, #b07f02 0%, #c66205 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 20px 60px rgba(13, 110, 253, 0.4);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    animation: slideDown 0.6s ease-out;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .blog-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,193,7,0.15) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+  }
+
+  .blog-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .blog-meta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+  }
+
+  .blog-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  .categories-wrapper {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.8s ease-out 0.2s both;
+  }
+
+  .category-badge {
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-badge::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,193,7,0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .category-badge:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .category-badge:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5);
+  }
+
+  .blog-content-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+    transition: all 0.4s ease;
+  }
+
+  .blog-content-card:hover {
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    transform: translateY(-5px);
+  }
+
+  .thumbnail-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .thumbnail-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .thumbnail-wrapper:hover::after {
+    opacity: 1;
+  }
+
+  .thumbnail-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.95);
+  }
+
+  .thumbnail-wrapper:hover img {
+    transform: scale(1.08);
+    filter: brightness(1);
+  }
+
+  .blog-content {
+    padding: 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .blog-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .features-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #353534 30%);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin: 2rem 0;
+    animation: fadeIn 1s ease-out 0.6s both;
+    border: 2px solid rgba(255, 193, 7, 0.3);
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .feature-item a,
+  .feature-item button {
+    color: #fde50d;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .feature-item i {
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+  }
+
+  .feature-item:hover i {
+    transform: scale(1.2) rotate(10deg);
+  }
+
+  .feature-item:hover a,
+  .feature-item:hover button {
+    color: #ffc107;
+    transform: translateY(-2px);
+  }
+
+  .comments-section {
+    margin-top: 3rem;
+    animation: fadeIn 1s ease-out 0.8s both;
+  }
+
+  .comments-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #0d6efd;
+  }
+
+  .comments-header h1 {
+    font-size: 2rem;
+    color: #333;
+    font-weight: 700;
+  }
+
+  .comment-form {
+    background: linear-gradient(135deg, #f5f7fa 0%, #f2f6f2 30%);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(10, 10, 10, 0.3);
+  }
+
+  .comment-form:hover {
+    box-shadow: 0 12px 35px rgba(255, 193, 7, 0.2);
+  }
+
+  .comment-form textarea {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    background: rgb(9, 9, 9);
+  }
+
+  .comment-form textarea:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    transform: scale(1.01);
+  }
+
+  .comment-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    border-left: 4px solid #0d6efd;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .comment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .comment-card:hover::before {
+    left: 100%;
+  }
+
+  .comment-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transform: translateX(5px);
+  }
+
+  .comment-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .comment-username {
+    font-weight: 700;
+    color: #0d6efd;
+    font-size: 1.1rem;
+  }
+
+  .comment-badge {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+  }
+
+  .comment-text {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .reply-btn {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(13, 110, 253, 0.1);
+  }
+
+  .reply-btn:hover {
+    background: rgba(255, 193, 7, 0.2);
+    transform: translateX(5px);
+  }
+
+  .reply-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 0.8rem 0;
+    border-left: 3px solid #ffc107;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5);
+    background: linear-gradient(135deg, #ffc107 0%, #ffb007 100%);
+  }
+
+  .share-modal .modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+
+  .share-modal .btn {
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .share-modal .btn:hover {
+    transform: scale(1.15) rotate(5deg);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #0d6efd, #ffc107, transparent);
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .blog-header h2 {
+      font-size: 1.8rem;
+    }
+    
+    .blog-content {
+      padding: 1.5rem;
+    }
+    
+    .features-bar {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<!--=================== CSS END ======================-->
+
+
+
+
+
+<div class="blog-container">
+  <div class="blog-header">
+    <h2>{{ blog.title }}</h2>
+    <div class="blog-meta">
+      <span>
+        <i class="bi bi-person-circle"></i>
+        {{ blog.creator }}
+      </span>
+      <span>
+        <i class="bi bi-eye"></i>
+        {{ blog.views }} Views
+      </span>
+      <span>
+        <i class="bi bi-clock"></i>
+        {{ blog.published_on|timesince }} ago
+      </span>
+    </div>
+  </div>
+
+  <div class="categories-wrapper">
+    {% for category in blog.categories.all %}
+      {% if category.is_active %}
+        <a href="{% url 'get_category' category.slug %}" class="category-badge">
+          {{ category.category }}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="blog-content-card">
+    <div class="thumbnail-wrapper">
+      <img src="{{ blog.thumbnail.url }}" alt="{{ blog.title }}">
+    </div>
+    <div class="blog-content">
+      {{ blog.content|safe }}
+    </div>
+  </div>
+
+  <div class="features-bar">
+    <div class="feature-item">
+      {% if liked %}
+        <a href="#">
+          <i class="bi bi-hand-thumbs-up-fill"></i>
+          {{ blog.likes.count }}
+        </a>
+      {% else %}
+        <form action="{% url 'blogs:create_like' %}" method="post" style="margin: 0;">
+          {% csrf_token %}
+          <input type="hidden" name="id" value="{{blog.id}}">
+          <button type="submit" style="background:none;border:none;padding:0;">
+            <i class="bi bi-hand-thumbs-up"></i>
+            {{ blog.likes.count }}
+          </button>
+        </form>
+      {% endif %}
+    </div>
+
+    <div class="feature-item">
+      <a href="#comments">
+        <i class="bi bi-chat-text"></i>
+        {{ comments.count }}
+      </a>
+    </div>
+
+    <div class="feature-item">
+      {% if bookmarked %}
+        <a href="#">
+          <i class="bi bi-bookmark-check-fill"></i>
+        </a>
+      {% else %}
+        <form action="{% url 'blogs:create_bookmark' %}" method="post" style="margin: 0;">
+          {% csrf_token %}
+          <input type="hidden" name="id" value="{{blog.id}}">
+          <button type="submit" style="background:none;border:none;padding:0;">
+            <i class="bi bi-bookmark-plus"></i>
+          </button>
+        </form>
+      {% endif %}
+    </div>
+
+    <div class="feature-item">
+      <button style="background:none;border:none;padding:0;" data-bs-toggle="modal" data-bs-target="#shareModal">
+        <i class="bi bi-box-arrow-up"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="comments-section" id="comments">
+    <div class="comments-header">
+      <i class="bi bi-chat-left-text"></i>
+      <h1>Comments ({{ comments.count }})</h1>
+    </div>
+
+    <div class="comment-form">
+      <form action="{% url 'blogs:create_comment' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ blog.id }}">
+        <div class="mb-3">
+          <label for="comment" class="form-label" style="font-weight: 600; color: #333;">Add Your Comment:</label>
+          <textarea class="form-control" id="comment" rows="4" name="comment" placeholder="Share your thoughts..." required></textarea>
+        </div>
+        {% if request.user.is_authenticated %}
+          <button type="submit" class="btn btn-primary float-end">
+            <i class="bi bi-send"></i>
+            Submit
+          </button>
+        {% else %}
+          <a href="{% url 'accounts:login' %}" class="btn btn-primary float-end">Login to Comment</a>
+        {% endif %}
+      </form>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    {% for comment in comments %}
+      <div class="comment-card">
+        <div class="comment-header">
+          <span class="comment-username">@{{ comment.creator.username }}</span>
+          <span class="comment-badge">{{ comment.published_on }}</span>
+        </div>
+        <p class="comment-text">{{ comment.comment }}</p>
+        <a class="reply-btn" data-bs-toggle="collapse" href="#reply{{comment.id}}" role="button" aria-expanded="false">
+          <i class="bi bi-reply"></i>
+          Reply
+        </a>
+        
+        <div class="collapse" id="reply{{comment.id}}" style="margin-top: 1rem;">
+          {% for reply in comment.replies.all %}
+            <div class="reply-card">
+              <div class="comment-header">
+                <span class="comment-username">@{{ reply.creator.username }}</span>
+                <span class="comment-badge">{{ reply.published_on }}</span>
+              </div>
+              <p class="comment-text">{{ reply.reply }}</p>
+            </div>
+          {% endfor %}
+          
+          <form action="{% url 'blogs:create_reply' %}" method="post" style="margin-top: 1rem;">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{comment.id}}">
+            <div class="row g-2">
+              <div class="col-10">
+                <input type="text" class="form-control" name="reply" placeholder="Write a reply..." required>
+              </div>
+              <div class="col-2">
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="bi bi-send"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="modal fade share-modal" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="border: none;">
+        <h1 class="modal-title fs-5">Share this blog</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align: center; padding: 2rem;">
+        <button class="btn btn-primary">
+          <i class="bi bi-facebook"></i>
+        </button>
+        <button class="btn btn-success">
+          <i class="bi bi-whatsapp"></i>
+        </button>
+        <button class="btn btn-dark">
+          <i class="bi bi-twitter-x"></i>
+        </button>
+        <button class="btn btn-danger">
+          <i class="bi bi-instagram"></i>
+        </button>
+        <button class="btn btn-info">
+          <i class="bi bi-telegram"></i>
+        </button>
+        <button class="btn btn-outline-secondary" id="copyBtn" onclick="copyUrl()">
+          <i class="bi bi-copy"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/blogs/blog.js' %}"></script>
+{% endblock %}

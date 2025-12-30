@@ -38,6 +38,15 @@ performed best for chatbot responses..
 *  **Local + Cloud AI Models**
 *  **High‑Accuracy Cultural Responses**
 
+<p>
+  <img src="Pictures_for_Github/img2.png" width="400"/>
+    <img src="Pictures_for_Github/img2.png" width="400"/>
+    <img src="Pictures_for_Github/img3.png" width="400"/>
+    <img src="Pictures_for_Github/img4.png" width="400"/>
+    <img src="Pictures_for_Github/img5.png" width="400"/>
+
+</p>
+
 ##  How It Works
 
 1. User ask query to chatbot 

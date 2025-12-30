@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block titlw %}Category{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <div class="row mb-3">
+    <h1 class="text-center">
+      Manage Categories
+    </h1>
+  </div>
+  <a role="button" class="btn btn-secondary btn-sm round-btn" href='{% url 'manage:create_category' %}'>
+    <i class="bi bi-plus-lg"></i>
+    Create Category
+  </a>
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID</th>
+          <th scope="col">Category</th>
+          <th scope="col">Desc</th>
+          <th scope="col">Actions</td>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        {% for category in categories %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <th>{{ category.id }}</th>
+          <td>{{ category.category|truncatechars:30 }}</td>
+          <td>{{ category.desc|truncatechars:50 }}</td>
+          <td>
+            <a class="btn btn-warning" href="{% url 'manage:edit_category' category.id %}" role="button">
+              <i class="bi bi-pencil-square"></i>
+              Edit
+            </a>
+            <a class="btn btn-danger" href="{% url 'manage:delete_category' category.id %}" role="button">
+              <i class="bi bi-trash3"></i>
+              Delete
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

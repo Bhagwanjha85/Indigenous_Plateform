@@ -1,0 +1,500 @@
+{% extends 'layout.html' %}
+
+{% block title %}Terms and Conditions{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<style>
+/* ===== Root Variables ===== */
+:root {
+  --primary-gradient: linear-gradient(135deg, #323231, #7b7b7a);
+  --secondary-gradient: linear-gradient(135deg, #e1b107, #fcfc03);
+  --accent-gradient: linear-gradient(135deg, #151514, #1e1e1e);
+}
+
+/* ===== Page Wrapper ===== */
+.terms-page-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #fcfc03, #e1b107);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 100px 20px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.terms-page-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: backgroundMove 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes backgroundMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* ===== Main Container ===== */
+.terms-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  animation: containerFadeIn 1s ease;
+  position: relative;
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== Header Section ===== */
+.terms-hero {
+  background: var(--accent-gradient);
+  padding: 80px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.terms-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: rgba(252, 252, 3, 0.1);
+  border-radius: 50%;
+  animation: floatCircle 8s ease-in-out infinite;
+}
+
+.terms-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 300px;
+  height: 300px;
+  background: rgba(225, 177, 7, 0.08);
+  border-radius: 50%;
+  animation: floatCircle 10s ease-in-out infinite reverse;
+}
+
+@keyframes floatCircle {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.1); }
+}
+
+.terms-hero h1 {
+  font-size: 56px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 20px;
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.8s ease;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.terms-hero-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Content Section ===== */
+.terms-content {
+  padding: 60px 50px;
+}
+
+.about-section {
+  margin-bottom: 50px;
+}
+
+/* ===== Section Styles ===== */
+.terms-content h3 {
+  font-size: 32px;
+  font-weight: 800;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 50px 0 25px;
+  position: relative;
+  padding-left: 25px;
+  animation: slideInLeft 0.6s ease;
+}
+
+.terms-content h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 35px;
+  background: var(--secondary-gradient);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(225, 177, 7, 0.4);
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.terms-content h4 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #b68002;
+  margin: 35px 0 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.terms-content h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background: var(--secondary-gradient);
+  border-radius: 10px;
+}
+
+/* ===== Paragraph Styles ===== */
+.terms-content p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #333;
+  margin-bottom: 25px;
+  text-align: justify;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(252, 252, 3, 0.03), rgba(225, 177, 7, 0.03));
+  border-radius: 15px;
+  border-left: 4px solid transparent;
+  transition: all 0.4s ease;
+  animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.terms-content p:hover {
+  background: linear-gradient(135deg, rgba(252, 252, 3, 0.08), rgba(225, 177, 7, 0.08));
+  border-left-color: #b68002;
+  transform: translateX(8px);
+  box-shadow: -5px 5px 20px rgba(225, 177, 7, 0.15);
+}
+
+/* ===== List Styles ===== */
+.terms-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+}
+
+.terms-content ul li {
+  position: relative;
+  padding: 18px 20px 18px 60px;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, rgba(252, 252, 3, 0.05), rgba(225, 177, 7, 0.05));
+  border-radius: 15px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: listSlideIn 0.6s ease backwards;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.terms-content ul li:nth-child(1) { animation-delay: 0.1s; }
+.terms-content ul li:nth-child(2) { animation-delay: 0.2s; }
+.terms-content ul li:nth-child(3) { animation-delay: 0.3s; }
+.terms-content ul li:nth-child(4) { animation-delay: 0.4s; }
+.terms-content ul li:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes listSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.terms-content ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background: var(--secondary-gradient);
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(225, 177, 7, 0.4);
+  transition: all 0.3s ease;
+}
+
+.terms-content ul li:hover {
+  background: linear-gradient(135deg, rgba(252, 252, 3, 0.12), rgba(225, 177, 7, 0.12));
+  transform: translateX(10px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(225, 177, 7, 0.25);
+}
+
+.terms-content ul li:hover::before {
+  transform: translateY(-50%) rotate(360deg) scale(1.2);
+  box-shadow: 0 8px 20px rgba(225, 177, 7, 0.6);
+}
+
+/* ===== Special Info Cards ===== */
+.info-card {
+  background: var(--accent-gradient);
+  color: #fff;
+  padding: 35px;
+  border-radius: 20px;
+  margin: 40px 0;
+  box-shadow: 0 20px 50px rgba(21, 21, 20, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: cardPulse 3s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(252,252,3,0.1) 0%, transparent 70%);
+  animation: rotateGlow 10s linear infinite;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.info-card p {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Text Center Class ===== */
+.text-center {
+  text-align: center !important;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .terms-hero h1 {
+    font-size: 36px;
+  }
+  
+  .terms-content {
+    padding: 40px 25px;
+  }
+  
+  .terms-content h3 {
+    font-size: 26px;
+  }
+  
+  .terms-content p {
+    font-size: 15px;
+    padding: 15px;
+  }
+  
+  .terms-content ul li {
+    padding-left: 50px;
+  }
+}
+
+/* ===== Scrollbar Styling ===== */
+.terms-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.terms-container::-webkit-scrollbar-track {
+  background: rgba(225, 177, 7, 0.1);
+  border-radius: 10px;
+}
+
+.terms-container::-webkit-scrollbar-thumb {
+  background: var(--secondary-gradient);
+  border-radius: 10px;
+}
+
+.terms-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-gradient);
+}
+</style>
+
+<div class="terms-page-wrapper">
+  <div class="terms-container">
+    
+    <!-- Hero Header -->
+    <div class="terms-hero">
+      <h1>Terms and Conditions</h1>
+      <p class="terms-hero-subtitle">Last Updated: December 28, 2025</p>
+    </div>
+
+    <!-- Content -->
+    <div class="terms-content">
+      
+      <div class="about-section">
+        <h3>Welcome to {{ SITE_NAME }}!</h3>
+        <p>These terms and conditions outline the rules and regulations for the use of {{ SITE_NAME }}'s Website, located at {{ SITE_URL }}.</p>
+        
+        <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use {{ SITE_NAME }} if you do not agree to take all of the terms and conditions stated on this page.</p>
+        
+        <div class="info-card">
+          <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company's terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services, in accordance with and subject to, prevailing law of Netherlands.</p>
+        </div>
+      </div>
+
+      <h3 class="text-center">Cookies</h3>
+      <p>We employ the use of cookies. By accessing {{ SITE_NAME }}, you agreed to use cookies in agreement with the {{ SITE_NAME }}'s Privacy Policy.</p>
+      
+      <p>Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.</p>
+
+      <h3 class="text-center">License</h3>
+      <p>Unless otherwise stated, {{ SITE_NAME }} and/or its licensors own the intellectual property rights for all material on {{ SITE_NAME }}. All intellectual property rights are reserved. You may access this from {{ SITE_NAME }} for your own personal use subjected to restrictions set in these terms and conditions.</p>
+      
+      <p>You must not:</p>
+      <ul>
+        <li>Republish material from {{ SITE_NAME }}</li>
+        <li>Sell, rent or sub-license material from {{ SITE_NAME }}</li>
+        <li>Reproduce, duplicate or copy material from {{ SITE_NAME }}</li>
+        <li>Redistribute content from {{ SITE_NAME }}</li>
+      </ul>
+
+      <p>This Agreement shall begin on the date 06/12/2025</p>
+
+      <h3>Comments and User Content</h3>
+      <p>Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. {{ SITE_NAME }} does not filter, edit, publish or review Comments prior to their presence on the website.</p>
+      
+      <p>You warrant and represent that:</p>
+      <ul>
+        <li>You are entitled to post the Comments on our website and have all necessary licenses and consents to do so</li>
+        <li>The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party</li>
+        <li>The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy</li>
+        <li>The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity</li>
+      </ul>
+
+      <h3 class="text-center">Hyperlinking to our Content</h3>
+      <p>The following organizations may link to our Website without prior written approval:</p>
+      <ul>
+        <li>Government agencies</li>
+        <li>Search engines</li>
+        <li>News organizations</li>
+        <li>Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses</li>
+        <li>System wide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups</li>
+      </ul>
+
+      <h3 class="text-center">iFrames</h3>
+      <p>Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.</p>
+
+      <h3 class="text-center">Content Liability</h3>
+      <p>We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.</p>
+
+      <h3 class="text-center">Your Privacy</h3>
+      <p>Please read our Privacy Policy for more information on how we handle your personal data.</p>
+
+      <h3 class="text-center">Reservation of Rights</h3>
+      <p>We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amend these terms and conditions and its linking policy at any time.</p>
+
+      <h3 class="text-center">Removal of links from our website</h3>
+      <p>If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.</p>
+      
+      <p>We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.</p>
+
+      <h3 class="text-center">Disclaimer</h3>
+      <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:</p>
+      <ul>
+        <li>Limit or exclude our or your liability for death or personal injury</li>
+        <li>Limit or exclude our or your liability for fraud or fraudulent misrepresentation</li>
+        <li>Limit any of our or your liabilities in any way that is not permitted under applicable law</li>
+        <li>Exclude any of our or your liabilities that may not be excluded under applicable law</li>
+      </ul>
+
+      <p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
+      
+      <div class="info-card">
+        <p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

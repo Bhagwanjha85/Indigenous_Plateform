@@ -1,0 +1,1441 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+  <head>
+    <style>
+      /* ===============Browser 1st time open hoga toh yeh popup show hoga start ===========*/
+      #welcomeModal .modal-content {
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: modalFadeIn 0.5s ease;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(-20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      #welcomeModal .modal-header {
+        border-radius: 20px 20px 0 0;
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        padding: 20px;
+      }
+
+      #welcomeModal .modal-body {
+        padding: 30px;
+      }
+
+      #welcomeModal .modal-footer {
+        border-top: 2px solid #f0f0f0;
+        padding: 20px;
+        border-radius: 0 0 20px 20px;
+      }
+
+      #welcomeModal .bi {
+        transition: all 0.3s ease;
+      }
+
+      #welcomeModal .btn:hover .bi {
+        transform: scale(1.2);
+      }
+
+      .modal-backdrop.show {
+        backdrop-filter: blur(5px);
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      /* ============= Starting popup css end ==========*/
+
+
+      /* ================ Navbar CSS ke liye start ================== */
+      .navbar .nav-link.active {
+        font-weight: 700;
+        color: #fff !important;
+        border-bottom: 3px solid #ffc107;
+      }
+
+      .custom-navbar {
+        backdrop-filter: blur(10px);
+      }
+
+      .navbar .nav-link.active {
+        color: #ffc107 !important;
+        font-weight: 600;
+        border-bottom: 2px solid #ffc107;
+      }
+
+      .search-box {
+        width: 300px;
+        transition: width 0.35s ease;
+      }
+
+      .search-box.expanded {
+        width: 420px;
+      }
+
+      .search-input {
+        transition: all 0.35s ease;
+      }
+
+      .search-input::placeholder {
+        transition: opacity 0.3s ease;
+      }
+
+      .search-box:not(.expanded) .search-input::placeholder {
+        opacity: 0.6;
+      }
+
+      /* =================== Navbar CSS ke liye end =============== */
+
+
+      /* =========== Featured Languages Section ========== */
+      .featured-languages-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #fcfc03 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .featured-languages-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(228, 228, 6, 0.1) 0%, transparent 70%);
+        animation: floatAnimation 8s ease-in-out infinite;
+      }
+
+      @keyframes floatAnimation {
+
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+
+        50% {
+          transform: translate(-30px, -30px);
+        }
+      }
+
+      .featured-languages-title {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+      }
+
+      .featured-languages-title h2 {
+        font-size: 42px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #323231, #7b7b7a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+      }
+
+      .featured-languages-title p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      .featured-languages-card {
+        background: #f5f5f5e8;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .featured-languages-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+      }
+
+      .featured-languages-card:hover::before {
+        transform: translateX(0);
+      }
+
+      .featured-languages-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+        border-color: #667eea;
+      }
+
+      .featured-languages-icon {
+        width: 80px;
+        height: 80px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        color: #fff;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(44, 44, 44, 0.4);
+      }
+
+      .featured-languages-card h4 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .featured-languages-card p {
+        color: #666;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .featured-languages-badge {
+        display: inline-block;
+        padding: 5px 15px;
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+
+      /* ===== Statistics Section ===== */
+      .statistics-impact-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #151514, #1e1e1e);
+        color: #fff;
+        position: relative;
+      }
+
+      .statistics-impact-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .statistics-impact-title h2 {
+        font-size: 42px;
+        font-weight: 800;
+        color: rgb(242, 242, 240);
+        margin-bottom: 15px;
+      }
+
+      .statistics-impact-title p {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .statistics-impact-box {
+        text-align: center;
+        padding: 30px;
+        background: rgba(206, 155, 2, 0.993);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 30px;
+      }
+
+      .statistics-impact-box:hover {
+        background: rgba(13, 14, 13, 0.981);
+        transform: translateY(-5px);
+      }
+
+      .statistics-impact-number {
+        font-size: 48px;
+        font-weight: 900;
+        margin-bottom: 10px;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .statistics-impact-label {
+        font-size: 18px;
+        opacity: 0.9;
+        font-weight: 600;
+      }
+
+      /* ===== How It Works Section ===== */
+      .how-it-works-section {
+        padding: 80px 0;
+        background: #fff;
+      }
+
+      .how-it-works-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .how-it-works-title h2 {
+        font-size: 42px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #323231, #7b7b7a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+      }
+
+      .how-it-works-title p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      .how-it-works-card {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #e1b107, #ebeff3);
+        border-radius: 20px;
+        margin-bottom: 30px;
+        position: relative;
+        transition: all 0.4s ease;
+      }
+
+      .how-it-works-card:hover {
+        background: linear-gradient(135deg, #f5f7fa 0%, #fcfc03 100%);
+        color: #0d0d0d;
+        transform: scale(1.05);
+      }
+
+      .how-it-works-card:hover .how-it-works-number {
+        background: #eeb300;
+        color: #0c0b0b;
+      }
+
+      .how-it-works-card:hover .how-it-works-icon {
+        color: #232323;
+      }
+
+      .how-it-works-number {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ffffff, #fffffff1);
+        color: #090909;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 900;
+        margin: 0 auto 20px;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .how-it-works-icon {
+        font-size: 48px;
+        color: #b68002;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .how-it-works-card h5 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .how-it-works-card p {
+        font-size: 15px;
+      }
+
+      /* ========== Community Contributors Section =========== */
+      .community-contributors-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      }
+
+      .community-contributors-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .community-contributors-title h2 {
+        font-size: 42px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #323231, #7b7b7a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+      }
+
+      .community-contributors-title p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      .community-contributors-card {
+        background: #5a1af0ac;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
+        margin-bottom: 30px;
+      }
+
+      .community-contributors-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
+      }
+
+      .community-contributors-avatar {
+        width: 100px;
+        height: 100px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 42px;
+        color: #fff;
+        margin: 0 auto 20px;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      .community-contributors-card h5 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fdf8f8;
+        margin-bottom: 5px;
+      }
+
+      .community-contributors-role {
+        color: #667eea;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .community-contributors-card p {
+        color: #fdfafa;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      /* ===== Call to Action Section ===== */
+      .call-to-action-section {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .call-to-action-section::before {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        top: -100px;
+        left: -100px;
+        animation: floatAnimation 6s ease-in-out infinite;
+      }
+
+      .call-to-action-title h2 {
+        font-size: 48px;
+        font-weight: 900;
+        margin-bottom: 20px;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .call-to-action-title p {
+        font-size: 20px;
+        margin-bottom: 40px;
+        opacity: 0.95;
+      }
+
+      .call-to-action-btn {
+        display: inline-block;
+        padding: 15px 40px;
+        background: #fff;
+        color: #667eea;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin: 0 10px;
+      }
+
+      .call-to-action-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        color: #764ba2;
+      }
+
+      .call-to-action-btn-secondary {
+        background: transparent;
+        border: 2px solid #fff;
+        color: #fff;
+      }
+
+      .call-to-action-btn-secondary:hover {
+        background: #fff;
+        color: #667eea;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+
+        .featured-languages-title h2,
+        .statistics-impact-title h2,
+        .how-it-works-title h2,
+        .community-contributors-title h2,
+        .call-to-action-title h2 {
+          font-size: 32px;
+        }
+
+        .statistics-impact-number {
+          font-size: 36px;
+        }
+
+        .call-to-action-btn {
+          margin: 10px 5px;
+          padding: 12px 30px;
+          font-size: 16px;
+        }
+      }
+
+
+
+
+      /* ================== chatbot css start =================== */
+      #chatbot-toggle {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        color: #efeded;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 99999;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        animation: floatPulse 2.5s infinite;
+      }
+
+      #chatbot-toggle:hover {
+        transform: scale(1.08);
+      }
+
+      /* Floating animation */
+      @keyframes floatPulse {
+        0% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-6px);
+        }
+
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* Chatbot popup */
+      #chatbot-container {
+        position: fixed;
+        bottom: 80px;
+        right: 24px;
+        width: 360px;
+        height: 400px;
+        background: #ffffff;
+        border-radius: 14px;
+        display: none;
+        flex-direction: column;
+        z-index: 99999;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+      }
+
+      .chatbot-header {
+        background: #0d6efd;
+        color: white;
+        padding: 10px 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .chatbot-header button {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      #chatbot-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* ============= Chatbot css end ============ */
+
+
+
+      /* =========== Footer Section ke liye start ================ */
+
+      /* ===== Visit count css style ==== */
+      .counter-wrapper {
+        text-align: center;
+      }
+
+      .counter-title {
+        color: #fff;
+        font-size: 15px;
+        margin-bottom: 4px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      .counter-container {
+        display: flex;
+        gap: 7px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .counter-box {
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(180deg, #ff6b6b 0%, #d63031 100%);
+        border-radius: 50%;
+        border: 1px solid white;
+        position: relative;
+        overflow: hidden;
+        animation: boxPulse 2s ease-in-out infinite;
+      }
+
+      .counter-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+        border-radius: 12px 12px 0 0;
+      }
+
+      .counter-box::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .counter-digit {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: 900;
+        color: #fff;
+        text-shadow:
+          0 2px 5px rgba(0, 0, 0, 0.5),
+          0 -1px 2px rgba(255, 255, 255, 0.3),
+          2px 2px 0 rgba(0, 0, 0, 0.2);
+        z-index: 2;
+        animation: digitFlip 0.6s ease;
+      }
+
+      .counter-separator {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        margin: 0 5px;
+      }
+
+      .counter-dot {
+        width: 4px;
+        height: 2px;
+        background: linear-gradient(135deg, #128b04, #2b9504);
+        border-radius: 50%;
+        box-shadow:
+          0 4px 15px rgba(214, 48, 49, 0.6),
+          inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        animation: dotBlink 1.5s ease-in-out infinite;
+      }
+
+
+      /* Animations */
+      @keyframes boxPulse {
+
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow:
+            0 10px 30px rgba(214, 48, 49, 0.5),
+            inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+            inset 0 3px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        50% {
+          transform: scale(1.02);
+          box-shadow:
+            0 15px 40px rgba(214, 48, 49, 0.7),
+            inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+            inset 0 3px 10px rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      @keyframes digitFlip {
+        0% {
+          transform: translate(-50%, -50%) rotateX(90deg);
+          opacity: 0;
+        }
+
+        100% {
+          transform: translate(-50%, -50%) rotateX(0deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes dotBlink {
+
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 480px) {
+        .counter-box {
+          width: 40px;
+          height: 30px;
+        }
+
+        .counter-digit {
+          font-size: 10px;
+        }
+
+        .counter-dot {
+          width: 8px;
+          height: 8px;
+        }
+      }
+
+      .counter-box:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 20px 50px rgba(214, 48, 49, 0.8),
+          inset 0 -3px 10px rgba(0, 0, 0, 0.3),
+          inset 0 3px 10px rgba(255, 255, 255, 0.2);
+      }
+
+      /* ============== Footer Section ke liye end =============*/
+    </style>
+
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="{% block ogtitle %}DJCMS: Content Management System{% endblock %}">
+    <meta property="og:image" itemprop="image"
+      content="{{ SITE_URL }}{% block ogimage %}{% static 'img/og.png' %}{% endblock %}">
+    <meta property="og:description"
+      content="{% block ogdescription %}A Blog Management Site aims to view/create/edit/delete blogs.{% endblock %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'css/chatbot.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>{% block title %}{% endblock %} | IndiLang</title>
+  </head>
+
+  <body>
+
+    <!--=========== Navbar start ============ -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-lg custom-navbar">
+      <div class="container">
+
+        <!-- LOGO inserting -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+          <img src="{% static 'img/logo.png' %}" alt="Logo" width="90" height="50">
+        </a>
+
+        <!-- MOBILE TOGGLER -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+          <!-- CENTER: SEARCH BAR -->
+          <form class="mx-auto search-box" role="search" action="{% url 'search' %}" method="get">
+            <div class="input-group">
+              <input class="form-control search-input" type="search" placeholder="Search languages, blogs..."
+                name="query">
+              <button class="btn btn-search" type="submit" style="background-color: #ffb007;">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- RIGHT: NAV LINKS -->
+          <ul class="navbar-nav ms-auto align-items-center gap-2">
+
+            <li class="nav-item">
+              <a class="nav-link {% if '/about' in request.path %}active{% endif %}" href="{% url 'about' %}">
+                About
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link {% if '/blog' in request.path %}active{% endif %}" href="{% url 'blog' %}">
+                Blog
+              </a>
+            </li>
+
+            {% if request.user.is_authenticated %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:logout' %}">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </a>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item">
+              <a class="btn btn-outline-light btn-sm" href="{% url 'accounts:login' %}">
+                Sign-In
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="btn btn-warning btn-sm text-dark fw-semibold" href="{% url 'accounts:register' %}">
+                Sign-Up
+              </a>
+            </li>
+
+            {% endif %}
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+    <!-- ================== Navbar end  ========= -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+    <!--  ======================= Hero start ==================-->
+    {% block hero %}
+    {% if request.path == '/' %}
+    <div class="slider-wrapper">
+      <div class="slider">
+        <div class="slider__slide slider__slide_dark-purple">
+          <img src="{% static 'img/hero1.png' %}">
+        </div>
+        <div class="slider__slide slider__slide_yellow">
+          <img src="https://indicwiki.iiit.ac.in/wp-content/uploads/2020/12/1_wiki_Bannner-1.png">
+        </div>
+        <div class="slider__slide slider__slide_yellow">
+          <img src="{% static 'img/hero2.png' %}">
+        </div>
+        <div class="slider__slide slider__slide_purple">
+          <img src="{% static 'img/hero3.png' %}">
+        </div>
+      </div>
+
+      <div class="left-arrow"></div>
+      <div class="right-arrow"></div>
+    </div>
+    {% endif %}
+    {% endblock %}
+    <!--============ Hero block end ================= -->
+
+    <!-- ============= Messages========-->
+    <div class="container mt-3" id="msg-box">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>{{ message.tags|upper }}</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+
+    <!--  ================= Featured Languages Section start ==============  -->
+    {% block mainbody %}
+    {% if request.path == '/' %}
+    <section class="featured-languages-section">
+      <div class="container">
+        <div class="featured-languages-title">
+          <h2>Featured Indigenous Languages</h2>
+          <p>Explore the rich linguistic diversity of India</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="featured-languages-card">
+              <div class="featured-languages-icon"><img src="../static/img/hindi.png" style="width: 50px;"></div>
+              <h4>Hindi</h4>
+              <p>The most widely spoken language in India, with rich literary traditions and cultural significance.</p>
+              <span class="featured-languages-badge">500M+ Speakers</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="featured-languages-card">
+              <div class="featured-languages-icon"><img src="../static/img/tamil.png" style="width: 50px;"></div>
+              <h4>Tamil</h4>
+              <p>One of the oldest classical languages with a literary tradition spanning over 2000 years.</p>
+              <span class="featured-languages-badge">80M+ Speakers</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="featured-languages-card">
+              <div class="featured-languages-icon"><img src="../static/img/bengali.png" style="width: 60px;"></div>
+              <h4>Bengali</h4>
+              <p>The language of Rabindranath Tagore, rich in poetry, literature, and cultural heritage.</p>
+              <span class="featured-languages-badge">230M+ Speakers</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="featured-languages-card">
+              <div class="featured-languages-icon"><img src="../static/img/telugu.png" style="width: 50px;"></div>
+              <h4>Telugu</h4>
+              <p>Known as the "Italian of the East" for its melodious sound and classical status.</p>
+              <span class="featured-languages-badge">80M+ Speakers</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="featured-languages-card">
+              <div class="featured-languages-icon"><img src="../static/img/marathi.png" style="width: 50px;"></div>
+              <h4>Marathi</h4>
+              <p>A language with a rich literary tradition, especially in poetry and theater.</p>
+              <span class="featured-languages-badge">83M+ Speakers</span>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="featured-languages-card">
+              <div class="featured-languages-icon"><img src="../static/img/sanskrit.png" style="width: 60px;"></div>
+              <h4>Sanskrit</h4>
+              <p>The ancient language of Indian scriptures, philosophy, and classical literature.</p>
+              <span class="featured-languages-badge">Classical Language</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--=======  Featured Languages Section end =====-->
+
+    <!---======= Statistics Section start ======-->
+    <section class="statistics-impact-section">
+      <div class="container">
+        <div class="statistics-impact-title">
+          <h2>Our Impact</h2>
+          <p>Making indigenous knowledge accessible to everyone</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="statistics-impact-box">
+              <div class="statistics-impact-number">22+</div>
+              <div class="statistics-impact-label">Languages</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="statistics-impact-box">
+              <div class="statistics-impact-number">5000+</div>
+              <div class="statistics-impact-label">Articles</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="statistics-impact-box">
+              <div class="statistics-impact-number">50K+</div>
+              <div class="statistics-impact-label">Active Users</div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="statistics-impact-box">
+              <div class="statistics-impact-number">100+</div>
+              <div class="statistics-impact-label">Contributors</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!---======= Statistics Section end ======-->
+
+    <!-- ===== How It Works Section start ===== -->
+    <section class="how-it-works-section">
+      <div class="container">
+        <div class="how-it-works-title">
+          <h2>How It Works</h2>
+          <p>Simple steps to preserve and share indigenous knowledge</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="how-it-works-card">
+              <div class="how-it-works-number">1</div>
+              <div class="how-it-works-icon"><i class="bi bi-person-plus"></i></div>
+              <h5>Sign Up</h5>
+              <p>Create your free account in seconds</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="how-it-works-card">
+              <div class="how-it-works-number">2</div>
+              <div class="how-it-works-icon"><i class="bi bi-globe"></i></div>
+              <h5>Choose Language</h5>
+              <p>Select your preferred indigenous language</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="how-it-works-card">
+              <div class="how-it-works-number">3</div>
+              <div class="how-it-works-icon"><i class="bi bi-pencil-square"></i></div>
+              <h5>Create Content</h5>
+              <p>Write and share your knowledge</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="how-it-works-card">
+              <div class="how-it-works-number">4</div>
+              <div class="how-it-works-icon"><i class="bi bi-people"></i></div>
+              <h5>Connect</h5>
+              <p>Engage with the community</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== How It Works Section end ===== -->
+
+    <!-- ===== Community Contributors Section start ===== -->
+    <section class="community-contributors-section">
+      <div class="container">
+        <div class="community-contributors-title">
+          <h2>Community Contributors</h2>
+          <p>Meet the people making a difference</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="community-contributors-card">
+              <div class="community-contributors-avatar"><img src="../static/img/men1.png" style="width: 70px;"></div>
+              <h5>Sumit Jha</h5>
+              <p class="community-contributors-role">Language Expert</p>
+              <p>Contributing Maithili and Sanskrit content for 3+ years</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="community-contributors-card">
+              <div class="community-contributors-avatar"><img src="../static/img/women1.png" style="width: 60px;"></div>
+              <h5>Priya Sharma</h5>
+              <p class="community-contributors-role">Cultural Researcher</p>
+              <p>Documenting traditional practices in regional languages</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="community-contributors-card">
+              <div class="community-contributors-avatar"><img src="../static/img/men3.jpg" style="width: 70px;"></div>
+              <h5>Amit Patel</h5>
+              <p class="community-contributors-role">Content Creator</p>
+              <p>Creating educational content in Gujarati, Telugu and Marathi</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="community-contributors-card">
+              <div class="community-contributors-avatar"><img src="../static/img/women2.png" style="width: 70px;"></div>
+              <h5>Lakshmi Iyer</h5>
+              <p class="community-contributors-role">Translator</p>
+              <p>Translating ancient texts to modern Tamil</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- ===== Community Contributors Section start ===== -->
+
+    <!-- ===== Call to Action Section sart ===== -->
+    <section class="call-to-action-section">
+      <div class="container">
+        <div class="call-to-action-title">
+          <h2>Join Our Community Today!</h2>
+          <p>Help preserve and promote indigenous languages and knowledge</p>
+        </div>
+        <a href="#" class="call-to-action-btn">Get Started <i class="bi bi-arrow-right"></i></a>
+        <a href="about/" class="call-to-action-btn call-to-action-btn-secondary">Learn More <i
+            class="bi bi-info-circle"></i></a>
+      </div>
+    </section>
+    <!-- ===== Call to Action Section end ===== -->
+    {% endif %}
+    {% endblock %}
+
+
+
+    <!---======== For chatbot showing in website =======--->
+    {% include "chatbot_widget.html" %}
+
+    {% block body %}{% endblock %}
+
+    <!--======== Footer section start ======-->
+    <section>
+      <footer class="main-footer mt-5">
+        <div class="container-fluid px-5">
+          <div class="row">
+
+            <!-- Column 1 -->
+            <div class="col-lg-3 col-md-6 col-sm-12 footer-col">
+              <h5>Indigenous Knowledge</h5>
+              <p>
+                A platform to bridge the knowledge gap by providing information in
+                Indian indigenous and regional languages.
+              </p>
+            </div>
+
+            <!-- Column 2-->
+            <div class="col-lg-3 col-md-6 col-sm-12 footer-col">
+              <h5>Research works</h5>
+              <ul>
+                <li><a href="https://iwgia.org/en/india/5658-iw-2025-india.html" target="_blank">Indigenous World
+                    2025</a></li>
+                <li><a
+                    href="https://www.ris.org.in/sites/default/files/Publication/DP%20272%20T%20C%20James%20English.pdf"
+                    target="_blank">T. C. James</a></li>
+                <li><a href="https://rupkatha.com/category/indigenous-studies/" target="_blank">Indigenous Studies</a>
+                </li>
+                <li><a href="https://www.tandfonline.com/doi/full/10.1080/0361526X.2024.2318145"
+                    target="_blank">Prakriti Ranjan Goswami</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="col-lg-3 col-md-6 col-sm-12 footer-col">
+              <h5>Quick Links</h5>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="{% url 'accounts:register' %}">Sign-up</a></li>
+                <li><a href="{% url 'accounts:login' %}">Sign-in</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 4-->
+            <div class="col-lg-3 col-md-6 col-sm-12 footer-col">
+              <h5>Wikimedia</h5>
+              <ul>
+                <li><a href="https://www.wikipedia.org/" target="_blank">Wikipedia</a></li>
+                <li><a href="https://www.wikibooks.org/" target="_blank">Wikibooks</a></li>
+                <li><a href="https://www.wikinews.org/" target="_blank">Wikinews</a></li>
+                <li><a href="https://www.wikiquote.org/" target="_blank">Wikiquote</a></li>
+                <li><a href="https://www.wikisource.org/" target="_blank">Wikisource</a></li>
+                <li><a href="https://www.wikiversity.org/" target="_blank">Wikiversity</a></li>
+                <li><a href="https://www.wikivoyage.org/" target="_blank">Wikivoyage</a></li>
+                <li><a href="https://commons.wikimedia.org/" target="_blank">Wikimedia Commons</a></li>
+                <li><a href="https://www.wikidata.org/" target="_blank">Wikidata</a></li>
+                <li><a href="https://meta.wikimedia.org/" target="_blank">Meta-Wiki</a></li>
+
+              </ul>
+            </div>
+
+          </div>
+
+          <hr />
+
+          <!-- Bottom of the Footer -->
+          <div class="row footer-bottom align-items-center">
+
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center text-md-start mb-3 mb-md-0">
+              © 2025 <a href="/">INDILANG</a>
+            </div>
+
+            <!-- Visitor Counter -->
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center mb-3 mb-md-0">
+              <div class="counter-wrapper">
+                <div class="counter-title"> Page visitors</div>
+                <div class="counter-container" id="counterContainer"></div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center text-md-end">
+              <a href="/terms-and-conditions">Terms & Conditions</a> |
+              <a href="/privacy">Privacy Policy</a>
+            </div>
+
+          </div>
+      </footer>
+      <!--======== Footer section end ======-->
+
+
+      <!--====== Welcome Popup Modal start ======-->
+      <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="welcomeModalLabel">
+                <i class="bi bi-stars me-2"></i>Welcome to IndiLang!
+              </h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <div class="text-center mb-3">
+                <img src="{% static 'img/logo.png' %}" alt="IndiLang Logo" style="max-width: 150px;">
+              </div>
+
+              <h4 class="text-center mb-3"> Discover Indigenous Knowledge!</h4>
+
+              <p class="lead text-center">
+                Welcome to IndiLang - Your gateway to Indian indigenous and regional languages!
+              </p>
+
+              <div class="row mt-4">
+                <div class="col-md-4 text-center mb-3">
+                  <i class="bi bi-book fs-1 text-primary"></i>
+                  <h6 class="mt-2">Rich Content</h6>
+                  <p class="small">Explore blogs and articles in multiple languages</p>
+                </div>
+
+                <div class="col-md-4 text-center mb-3">
+                  <i class="bi bi-globe fs-1 text-success"></i>
+                  <h6 class="mt-2">Cultural Heritage</h6>
+                  <p class="small">Preserve and promote indigenous knowledge</p>
+                </div>
+
+                <div class="col-md-4 text-center mb-3">
+                  <i class="bi bi-people fs-1 text-warning"></i>
+                  <h6 class="mt-2">Community</h6>
+                  <p class="small">Join thousands of language enthusiasts</p>
+                </div>
+              </div>
+
+              <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>New here?</strong> Start by exploring our featured blogs ..
+              </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <i class="bi bi-x-circle me-2"></i>Close
+              </button>
+              <a href="{% url 'blog' %}" class="btn btn-primary">
+                <i class="bi bi-arrow-right-circle me-2"></i>Explore Blogs
+              </a>
+              <a href="{% url 'accounts:register' %}" class="btn btn-warning">
+                <i class="bi bi-person-plus me-2"></i>Sign Up
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--====== Welcome Popup Modal end ======-->
+
+
+      <!--===== Javascripts start ======= -->
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+
+      <script>
+        "use strict";
+
+        const slider = document.querySelector(".slider");
+        const leftArrow = document.querySelector(".left-arrow");
+        const rightArrow = document.querySelector(".right-arrow");
+
+        const slides = document.querySelectorAll(".slider__slide");
+        const firstSlide = slides[0];
+        const lastSlide = slides[slides.length - 1];
+
+        const cloneFirst = firstSlide.cloneNode(true);
+        const cloneLast = lastSlide.cloneNode(true);
+
+        slider.appendChild(cloneFirst);
+        slider.insertBefore(cloneLast, firstSlide);
+
+        slider.scrollLeft = slider.offsetWidth;
+
+        slider.addEventListener('scroll', () => {
+          if (slider.scrollLeft === 0) {
+            slider.classList.add('no-smooth');
+            slider.scrollLeft = slider.scrollWidth - (2 * slider.offsetWidth);
+            slider.classList.remove('no-smooth');
+          }
+
+          else if (Math.abs(slider.scrollLeft - (slider.scrollWidth - slider.offsetWidth)) < 2) {
+            slider.classList.add('no-smooth');
+            slider.scrollLeft = slider.offsetWidth;
+            slider.classList.remove('no-smooth');
+          }
+        });
+
+
+        function scrollRight() {
+          slider.scrollBy({
+            left: window.innerWidth,
+            behavior: "smooth"
+          });
+        }
+
+        function scrollLeft() {
+          slider.scrollBy({
+            left: -window.innerWidth,
+            behavior: "smooth"
+          });
+        }
+
+        let timerId = setInterval(scrollRight, 7000);
+
+        function resetTimer() {
+          clearInterval(timerId);
+          timerId = setInterval(scrollRight, 7000);
+        }
+
+        leftArrow.addEventListener("click", function () {
+          scrollLeft();
+          resetTimer();
+        });
+
+        rightArrow.addEventListener("click", function () {
+          scrollRight();
+          resetTimer();
+        });
+
+        /*chatbot js concept*/
+        function toggleChatbot() {
+          const box = document.getElementById("chatbot-container");
+
+          if (box.style.display === "block") {
+            box.style.display = "none";
+          } else {
+            box.style.display = "block";
+          }
+        }
+        const searchBox = document.querySelector(".search-box");
+        const searchInput = document.querySelector(".search-input");
+
+        searchInput.addEventListener("focus", () => {
+          searchBox.classList.add("expanded");
+        });
+
+        searchInput.addEventListener("blur", () => {
+          searchBox.classList.remove("expanded");
+        });
+
+
+        // Visitor Counter
+        const visitorCount = {{ site_views|default: 0}};
+
+        function updateCounter(count) {
+          const container = document.getElementById('counterContainer');
+          if (!container) return;
+
+          container.innerHTML = '';
+          const countStr = count.toString().padStart(4, '0');
+
+          for (let i = 0; i < countStr.length; i++) {
+            const digit = countStr[i];
+
+            const box = document.createElement('div');
+            box.className = 'counter-box';
+
+            const digitSpan = document.createElement('span');
+            digitSpan.className = 'counter-digit';
+            digitSpan.textContent = digit;
+
+            box.appendChild(digitSpan);
+            container.appendChild(box);
+
+            const posFromRight = countStr.length - i - 1;
+            if (posFromRight > 0 && posFromRight % 3 === 0) {
+              const separator = document.createElement('div');
+              separator.className = 'counter-separator';
+              separator.innerHTML = '<div class="counter-dot"></div><div class="counter-dot"></div>';
+              container.appendChild(separator);
+            }
+          }
+        }
+
+        updateCounter(visitorCount);
+
+
+        /* for popup first time open in any browser*/
+        window.addEventListener('DOMContentLoaded', function () {
+          const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+          welcomeModal.show();
+        });
+
+
+      </script>
+      <!--============= Javascript End===========-->
+  </body>
+
+</html>

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ query }} - Search{% endblock %}
+
+{% block hero %}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <h3>Search results for "{{ query }}"</h3>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for blog in blogs %}
+      {% include 'card.html' with blog=blog %}
+    {% empty %}
+    <p class="mt-5">No data found!, search again different<p>
+    {% endfor %}
+  </div>
+  {% include 'pagination.html' with blogs=blogs %}
+</div>
+{% endblock %}

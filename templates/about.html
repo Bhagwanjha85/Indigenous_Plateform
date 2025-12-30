@@ -1,0 +1,559 @@
+{% extends 'layout.html' %}
+
+{% block title %}About{% endblock %} 
+
+{% block body %}
+<style>
+/* ===== About Page Wrapper ===== */
+.about-page-wrapper {
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #fcfc03 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-page-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(228, 228, 6, 0.1) 0%, transparent 70%);
+  animation: floatAnimation 8s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, -30px); }
+}
+
+/* ===== Page Title ===== */
+.about-page-wrapper h1 {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #323231, #7b7b7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-page-wrapper h1 u {
+  text-decoration: none;
+  border-bottom: 4px solid #e1b107;
+  padding-bottom: 5px;
+}
+
+/* ===== About Container ===== */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  animation: containerFadeIn 1s ease;
+}
+
+@keyframes containerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== About Header ===== */
+.about-header {
+  padding: 60px 40px;
+  text-align: center;
+  background: linear-gradient(135deg, #151514, #1e1e1e);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: rgba(252, 252, 3, 0.1);
+  border-radius: 50%;
+  animation: floatCircle 8s ease-in-out infinite;
+}
+
+@keyframes floatCircle {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.1); }
+}
+
+.about-header h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: rgb(242, 242, 240);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  background: none;
+  -webkit-text-fill-color: #fff;
+}
+
+.about-header p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== About Sections ===== */
+.about-section {
+  padding: 40px 50px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, rgba(252, 252, 3, 0.03), rgba(225, 177, 7, 0.03));
+  border-radius: 20px;
+  border-left: 6px solid #e1b107;
+  transition: all 0.4s ease;
+  animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-section:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(225, 177, 7, 0.2);
+  border-left-color: #b68002;
+}
+
+.about-section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #323231, #7b7b7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.about-section h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 35px;
+  background: linear-gradient(135deg, #e1b107, #fcfc03);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(225, 177, 7, 0.4);
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* ===== About Images ===== */
+.about-section img {
+  width: 100%;
+  max-width: 60vh;
+  border-radius: 15px;
+  margin: 20px 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.4s ease;
+}
+
+.about-section img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* ===== About Lists ===== */
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+}
+
+.about-list li {
+  position: relative;
+  padding: 18px 20px 18px 60px;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, rgba(252, 252, 3, 0.05), rgba(225, 177, 7, 0.05));
+  border-radius: 15px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.about-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 20px;
+  top: 18px;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, #e1b107, #fcfc03);
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 5px 15px rgba(225, 177, 7, 0.4);
+  transition: all 0.3s ease;
+}
+
+.about-list li:hover {
+  background: linear-gradient(135deg, rgba(252, 252, 3, 0.12), rgba(225, 177, 7, 0.12));
+  transform: translateX(10px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(225, 177, 7, 0.25);
+}
+
+.about-list li:hover::before {
+  transform: rotate(360deg) scale(1.2);
+  box-shadow: 0 8px 20px rgba(225, 177, 7, 0.6);
+}
+
+.about-list li mark {
+  background: linear-gradient(135deg, #e1b107, #fcfc03);
+  color: #000;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+/* ===== About Footer ===== */
+.about-footer {
+  padding: 50px 40px;
+  text-align: center;
+  background: linear-gradient(135deg, #151514, #1e1e1e);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-footer::before {
+  content: '';
+  position: absolute;
+  bottom: -50%;
+  left: -20%;
+  width: 400px;
+  height: 400px;
+  background: rgba(225, 177, 7, 0.1);
+  border-radius: 50%;
+  animation: floatCircle 10s ease-in-out infinite reverse;
+}
+
+.about-footer h3 {
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fcfc03, #e1b107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-footer p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-footer div {
+  text-align: left;
+  max-width: 600px;
+  margin: 30px auto;
+  position: relative;
+  z-index: 1;
+}
+
+.about-footer li {
+  list-style: none;
+  margin: 15px 0;
+  padding: 15px 20px;
+  background: rgba(252, 252, 3, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.about-footer li:hover {
+  background: rgba(252, 252, 3, 0.2);
+  transform: translateX(10px);
+}
+
+.about-footer a {
+  color: #fcfc03;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.about-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .about-page-wrapper h1 {
+    font-size: 32px;
+  }
+  
+  .about-header h1 {
+    font-size: 28px;
+  }
+  
+  .about-section {
+    padding: 30px 25px;
+  }
+  
+  .about-section h2 {
+    font-size: 24px;
+  }
+  
+  .about-section img {
+    max-width: 100%;
+  }
+  
+  .about-list li {
+    padding-left: 50px;
+  }
+}
+</style>
+
+  <div class="row">
+    <h1 class="text-center mt-3 mb-3">
+      <u>About Us</u>
+    </h1>
+  </div>
+
+  <section class="about-container">
+    <div class="about-header">
+      <h1>About Our Indigenous Language Development Project</h1>
+      <p>
+        The project aims to reduce the knowledge and language gap by making
+        Wikipedia-style information available in Indian indigenous and regional
+        languages.
+      </p>
+    </div>
+
+    <div class="about-section">
+      <h2>Why This Project?</h2>
+      <p>
+        Wikipedia has more than 5 million articles in English, but most people
+        in India do not take full advantage of it. Almost 90% of Indians study
+        in their mother tongue or Hindi. Because of this, they miss out on the
+        vast amount of knowledge available online.
+      </p>
+    </div>
+
+    <div class="about-section">
+      <h2>The Knowledge Gap</h2>
+      <img
+        src="https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fsrep18563/MediaObjects/41598_2015_Article_BFsrep18563_Fig1_HTML.jpg"
+        style="width: 60vh"
+      />
+      <img
+        src="https://indianetzone.wordpress.com/wp-content/uploads/2024/05/8da4e-guide-to-indian-tourism-14.jpg"
+        style="width: 60vh"
+      />
+      <br><br>
+      <ul class="about-list">
+        <li>
+          India receives 117 million Wikipedia views per day, but these views
+          are mostly from English users (only 10% of the population).
+        </li>
+        <li>
+          90% of people cannot access or understand the English Wikipedia
+          properly.
+        </li>
+        <li>
+          This creates a large knowledge gap between English users and native
+          speakers.
+        </li>
+        <li>
+          Countries like Japan show how powerful a native language Wikipedia can
+          be (90% of Japanese use Wikipedia).
+        </li>
+      </ul>
+    </div>
+
+    <div class="about-section">
+      <h2>Project Purpose</h2>
+      <p>
+        The project aims to make knowledge easily accessible to people who speak
+        indigenous, tribal and regional languages ​​in India. Most important
+        information on the Internet today, especially on Wikipedia, is available
+        in English. But the reality is that a large area of India cannot read
+        English comfortably. Because of this, they miss out on important
+        knowledge that can help them learn, grow and improve their lives.
+      </p>
+
+      <p>
+        We want to solve this problem by creating a platform where people can
+        read high quality information in their native language. When knowledge
+        comes in language that people understand, it becomes more meaningful,
+        more useful and more accessible.
+      </p>
+
+      <p>
+        The project is inspired by the IndicWiki initiative of IIIT Hyderabad,
+        which aims to create Wikipedia content in Indian native languages. We
+        want to take this idea further by creating a simple, friendly and
+        easy-to-use website for indigenous and tribal communities. Our goal is
+        not only to translate knowledge, but also to make it culturally
+        relevant, understandable and useful for students of all backgrounds.
+      </p>
+
+      <p>
+        We also want to make sure the process of creating content is easy.
+        Community members, students, teachers and volunteers can all participate
+        in contributing articles, stories, local history, cultural knowledge and
+        teaching materials in their own language. This will help to build a
+        strong and active community.
+      </p>
+
+      <p>
+        The aim of this project is also to reduce the digital divide. There is a
+        big difference between those who have access to English skills and those
+        who do not. By giving them access to information in the language they
+        know, we aim to bring equality to learning, education and solving real
+        world problems.
+      </p>
+    </div>
+
+    <div class="about-section">
+      <h2>Project Objectives</h2>
+      <ul class="about-list">
+        <li>Document all learning and methods used in the IndiWiki project.</li>
+        <li>
+          Create a platform that facilitates information for indigenous
+          communities.
+        </li>
+        <li>Support all Indian languages, not only Telugu or Hindi.</li>
+        <li>
+          Reduce the digital divide and the knowledge divide between tribal
+          communities.
+        </li>
+        <li>
+          Encourage more local language contributions from community members.
+        </li>
+      </ul>
+    </div>
+
+    <div class="about-section">
+      <h2>Features of Our Website</h2>
+      <ul class="about-list">
+        <li>
+          <mark>Easy to read articles in local languages</mark><br />
+          The website provides information written in simple and clear language
+          that local people can easily understand. The articles are designed
+          with the reading styles of indigenous, tribal and regional communities
+          in mind. The content is not complex, and avoid heavy technical words .
+          This helps people of all educational levels to learn without
+          difficulty.
+        </li>
+        <li>
+          <mark>culture and society-based knowledge</mark><br />
+          Along with general knowledge, the website contains special sections
+          that highlight the unique culture, traditions, lifestyle and heritage
+          of various communities. It gives space to local stories, folk
+          knowledge, practices, festivals and history that are not documented on
+          mainstream platforms. This helps preserve cultural identity and allows
+          local communities to see themselves represented online.
+        </li>
+        <li>
+          <mark>Simple user interface for tribal and agricultural users</mark
+          ><br />
+          The website design is kept very clean, simple and easy to navigate.
+          Buttons, menus and options are large and easy to identify. Even
+          first-time internet users from tribal and rural areas can use it
+          without any confusion. The user interface focuses on minimal text,
+          clear icons and a friendly structure without distractions.
+        </li>
+        <li>
+          <mark>Support for multiple scripts and languages</mark><br />
+          There are many languages and scripts in India. This website supports
+          multiple scripts so that users can read the content in their native
+          language. Be it Telugu, Hindi, Marathi, Bengali, Santali (Ol Chiki),
+          Gondi or any other indigenous or regional script, the platform is
+          built in such a way that different languages ​​can be easily added in
+          the future.
+        </li>
+      </ul>
+    </div>
+
+    <div class="about-section">
+      <h2>Community Impact</h2>
+      <p>
+        This project will help millions of indigenous and Indian language
+        speakers access educational resources. Students, teachers, tribal
+        communities and local researchers will be able to read and understand
+        the knowledge in their mother tongue.
+      </p>
+    </div>
+
+    <div class="about-section">
+      <h2>Future Scope</h2>
+      <ul class="about-list">
+        <li>Adding more Indian languages and dialects.</li>
+        <li>AI-based translation and article suggestion tools.</li>
+        <li>Community driven content development.</li>
+        <li>Offline mode for rural areas with less Internet.</li>
+        <li>Workshops and awareness programs for indigenous communities.</li>
+      </ul>
+    </div>
+
+    <div class="about-footer">
+      <h3>Contact US</h3>
+      <p>
+        Our mission is to build a knowledge bridge for all indigenous and Indian
+        communities so that no one is left behind.
+      </p>
+    
+      <p>
+        <div style="text-align:left; text-decoration:none; padding:30px;">
+       <li><a href="https://en.wikipedia.org/wiki/User:Baap8969/sandbox"
+          >👉About the project Admin</a> <br>
+         <li> <a href="https://github.com/Bhagwanjha85/"
+          >👉Github Repo</a>
+          <li> <a href="https://bhagwanjha.netlify.app/"
+          >👉Portfolio Link</a>
+        </div>
+      </p>
+    </div>
+  </section>
+  {% endblock %}
+</div>

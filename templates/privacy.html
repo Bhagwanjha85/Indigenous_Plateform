@@ -1,0 +1,253 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}Privacy Policy{% endblock %}
+
+{% block body %}
+
+<style>
+/* ===== Privacy Page Wrapper ===== */
+.privacy-page {
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #fcfc03 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.privacy-page::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(228, 228, 6, 0.1) 0%, transparent 70%);
+  animation: floatAnimation 8s ease-in-out infinite;
+}
+
+@keyframes floatAnimation {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, -30px); }
+}
+
+/* ===== Container ===== */
+.privacy-container {
+  max-width: 1100px;
+  margin: auto;
+  background: #f5f5f5e8;
+  border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+  overflow: hidden;
+  animation: fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Header ===== */
+.privacy-header {
+  padding: 50px 30px;
+  text-align: center;
+  background: linear-gradient(135deg, #151514, #1e1e1e);
+  color: #fff;
+}
+
+.privacy-header h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: rgb(242, 242, 240);
+}
+
+.privacy-header p {
+  margin-top: 10px;
+  opacity: 0.9;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ===== Content ===== */
+.privacy-content {
+  padding: 50px 40px;
+}
+
+.privacy-section {
+  margin-bottom: 35px;
+  padding: 30px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  transition: all 0.4s ease;
+  border-left: 6px solid #323231;
+}
+
+.privacy-section:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+.privacy-section h2 {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #323231, #7b7b7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 15px;
+}
+
+.privacy-section p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.privacy-section ul {
+  margin-top: 15px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.privacy-section ul li {
+  padding-left: 28px;
+  margin-bottom: 12px;
+  position: relative;
+  color: #444;
+}
+
+.privacy-section ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #b68002;
+  font-weight: bold;
+}
+
+/* ===== Highlight Box ===== */
+.highlight-box {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #e1b107, #ebeff3);
+  color: #0d0d0d;
+  box-shadow: 0 10px 30px rgba(225, 177, 7, 0.4);
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* ===== Contact ===== */
+.privacy-contact {
+  text-align: center;
+  padding: 35px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #151514, #1e1e1e);
+  color: #fff;
+}
+
+.privacy-contact h2 {
+  background: linear-gradient(135deg, #fcfc03, #e1b107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.privacy-contact p {
+  color: rgba(255,255,255,0.9);
+}
+
+.privacy-contact a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 30px;
+  background: #fcfc03;
+  color: #000;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.privacy-contact a:hover {
+  background: #eeb300;
+  transform: scale(1.08);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .privacy-header h1 { font-size: 30px; }
+  .privacy-content { padding: 30px 20px; }
+}
+</style>
+
+<section class="privacy-page">
+  <div class="privacy-container">
+
+    <div class="privacy-header">
+      <h1>Privacy Policy</h1>
+      <p>Last Updated: December 28, 2025</p>
+    </div>
+
+    <div class="privacy-content">
+
+      <div class="privacy-section">
+        <h2>Introduction</h2>
+        <p>
+          We respect your privacy and are committed to protecting your personal
+          data. This Privacy Policy explains how we collect, use, and safeguard
+          your information.
+        </p>
+       <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum id eveniet saepe ad, consequuntur animi, sint aliquam amet nulla in ut hic ipsa pariatur fuga illum sit voluptatum, modi ipsam repellendus dolore molestiae. Aperiam doloribus odio voluptates ab dolore et, alias, quod labore fuga rem quibusdam iure voluptatem non laborum vel aut maxime. Laboriosam, nobis quod dolor aliquam alias praesentium molestias eveniet maxime, suscipit dolorem deleniti cum. Non suscipit, atque assumenda amet vero pariatur, eum, nemo esse blanditiis temporibus nesciunt. Nulla quibusdam nostrum nisi doloremque sequi, error quia corrupti fugit delectus eligendi magni, corporis neque. Sapiente aliquam repellendus nobis non quae corrupti laborum, explicabo voluptatum hic recusandae rerum quaerat, debitis accusantium perferendis doloribus. Deleniti assumenda vel dolor nulla architecto at atque quo quaerat quae repudiandae. Dignissimos alias sequi temporibus, vel ipsum nostrum ducimus reprehenderit eum ullam delectus quia! Illo velit sunt animi. Delectus commodi, repudiandae cumque illum dolorum totam quos veniam dolore debitis tempore odio asperiores molestiae dolores! Ullam illum facilis tempore molestiae iure esse ea saepe, eum aut odit velit eos nihil eaque neque reiciendis nulla cumque, qui ex quod accusantium nobis officiis odio? Quam cum possimus laudantium, dicta natus reprehenderit placeat, hic quidem quod nesciunt expedita rem delectus assumenda animi, voluptatibus quibusdam eius voluptatum vitae. Explicabo, autem itaque a iusto non possimus aperiam saepe similique commodi voluptates deleniti consequuntur rem minima distinctio pariatur necessitatibus voluptatum, modi dolorum? Impedit vitae aut, non fugiat eaque nostrum explicabo magni? Aut, corporis nam quaerat reiciendis modi quis quo, tempora recusandae sequi eveniet id sit, inventore nesciunt earum rem nobis. Numquam fugiat ipsa voluptatibus itaque consequatur nesciunt, doloremque, veritatis, tempore doloribus nihil unde laboriosam cumque autem dolore amet placeat. Quaerat porro eum adipisci? Est mollitia fugiat voluptatum iste provident aperiam aut rem nesciunt porro sed, obcaecati alias asperiores. Aut dolorum earum fugiat?</p>  
+        <div class="highlight-box">
+          Please read this policy carefully to understand how your data is handled.
+        </div>
+      </div>
+
+      <div class="privacy-section">
+        <h2>Information We Collect</h2>
+        <ul>
+          <li>Personal information such as name and email</li>
+          <li>Usage and technical data</li>
+          <li>Cookies and analytics data</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>How We Use Your Data</h2>
+        <ul>
+          <li>To provide and improve our services</li>
+          <li>To communicate important updates</li>
+          <li>For security and fraud prevention</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section">
+        <h2>Data Security</h2>
+        <p>
+          We implement strong security measures including encryption,
+          access control, and regular audits to protect your data.
+        </p>
+      </div>
+
+      <div class="privacy-section">
+        <h2>Your Rights</h2>
+        <ul>
+          <li>Access your personal data</li>
+          <li>Request correction or deletion</li>
+          <li>Withdraw consent anytime</li>
+        </ul>
+      </div>
+
+      <div class="privacy-section privacy-contact">
+        <h2>Contact Us</h2>
+        <p>If you have questions about this policy, contact us:</p>
+        <a href="mailto:privacy@indilang.com">privacy@indilang.com</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
